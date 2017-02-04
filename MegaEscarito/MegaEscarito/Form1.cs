@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace MegaEscarito
 {
-    public enum Material { Oak, Pine, Laminate, Purpleheart, Zebrawood, Mahogany };
+    public enum Material {Oak, Pine, Laminate, Purpleheart, Zebrawood, Mahogany};
 
     public partial class Form1 : Form
     {
@@ -41,7 +42,7 @@ namespace MegaEscarito
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Material material = (Material)material.SelectedItem;
+           // Material material = (Material)material.SelectedItem;
         }
 
         private void submit_Click(object sender, EventArgs e)
@@ -122,10 +123,9 @@ namespace MegaEscarito
             {
                 errorList += "Please select valid order days (3, 5, 7, or 14).\n";
             }
-
+    
             //if any errors then display them and return
-            if (errorList.Length > 0)
-            {
+            if (errorList.Length > 0) {
                 MessageBox.Show(errorList);
                 return;
             }
@@ -141,7 +141,141 @@ namespace MegaEscarito
 
         public DeskOrder(int inWidth, int inLength, int inDrawerCount, Material inMaterial, int inOrderDays)
         {
+            //asigning to new variables
+            int width = inWidth;
+            int length = inLength;
+            int drawers = inDrawerCount;
+            int days = inOrderDays;
+            int totalSize = width * length;
+            
+            
+            
+            // rush order Array read in, You might want to use yours mine is [9,0]
+            string[] prices = File.ReadAllLines("rushPrices.txt");
+            double[,] rushOrderArray = new double[prices.Length, 3];
+            int[,] price = new int[3, 3];
 
+            for (int i = 0; i < prices.Length; i++)
+            {
+                string[] fields = prices[i].Split(' ');
+                for (int j = 0; j < fields.Length; j++)
+                {
+                    if (j == 3) break;
+                    rushOrderArray[i, j] = double.Parse(fields[j]);
+
+
+
+
+
+                }
+            }
+            
+            // figure out cost of rush order
+            double[,] rushTable = new double[3, 3];
+            double[] rushInfo = new double[3];
+            double size = totalSize;
+            double cost = 0;
+            rushTable = rushOrderArray;
+
+            if (days == 3)
+            {
+                if (size < 1000)
+                {
+                    cost = rushTable[0, 0];
+
+                }
+                else if (size >= 1000 && size <= 1999)
+                {
+                    cost = rushTable[1, 0];
+
+                }
+                else if (size >= 2000)
+                {
+                    cost = rushTable[2, 0];
+
+                }
+            }
+
+            if (days == 5)
+            {
+                if (size < 1000)
+                {
+                    cost = rushTable[3, 0];
+
+                }
+                else if (size >= 1000 && size <= 1999)
+                {
+                    cost = rushTable[4, 0];
+
+                }
+                else if (size >= 2000)
+                {
+                    cost = rushTable[5, 0];
+
+                }
+            }
+            if (days == 7)
+            {
+                if (size < 1000)
+                {
+                    cost = rushTable[6, 0];
+
+                }
+                else if (size >= 1000 && size <= 1999)
+                {
+                    cost = rushTable[7, 0];
+
+                }
+                else if (size >= 2000)
+                {
+                    cost = rushTable[8, 0];
+
+                }
+            }
+
+            if (days == 14)
+            {
+                cost = 0;
+            }
+
+            rushInfo[1] = days;
+            rushInfo[2] = cost;
+            
+            // figure out cost send it to total
+            double totalPrice = Total(totalSize, drawers, cost);
+
+            string x2 = System.Convert.ToString(totalPrice);
+            MessageBox.Show(x2);
+
+
+
+
+
+
+        }
+        private double Total(int totalSize, int drawers, double cost)
+        {
+            double totals = 0;
+            double totalInch;
+            double costInch = 0;
+            double drawerTotal;
+            double intialCost = 200;
+            
+            //used for finding price of area
+            totalInch = totalSize;
+
+            if (totalInch >= 1000)
+            {
+                double subtract = totalInch - 1000;
+                costInch = subtract * 5;
+            }
+            //cost of drawers
+            drawerTotal = (drawers * 50);
+
+            totals = costInch + intialCost + drawerTotal;
+
+         
+            return totals;
         }
 
         public void SetMaterial(MegaEscarito.Material deskMaterial)
@@ -149,6 +283,6 @@ namespace MegaEscarito
             this.material = deskMaterial;
             MessageBox.Show(deskMaterial.ToString());
         }
-
+        
     }
 }
