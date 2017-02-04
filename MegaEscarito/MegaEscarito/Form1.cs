@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MegaEscarito
 {
-    public enum Material {Oak, Pine, Laminate, Purpleheart, Zebrawood, Mahogany };
+    public enum Material { Oak, Pine, Laminate, Purpleheart, Zebrawood, Mahogany };
 
     public partial class Form1 : Form
     {
@@ -22,36 +22,116 @@ namespace MegaEscarito
 
             foreach (Material materialValue in valArray)
             {
-                listBox1.Items.Add(materialValue);
+                material.Items.Add(materialValue);
             }
 
-            listBox1.SelectedIndex = 0;
+            material.SelectedIndex = 0;
+
+            //Initialize Order Days options
+            Dictionary<int, string> orderDayOptions = new Dictionary<int, string>();
+            orderDayOptions.Add(14, "14 days (standard)");
+            orderDayOptions.Add(3, "3 days (rush)");
+            orderDayOptions.Add(5, "5 days (rush)");
+            orderDayOptions.Add(7, "7 days (rush)");
+
+            orderDays.DataSource = new BindingSource(orderDayOptions, null);
+            orderDays.DisplayMember = "Value";
+            orderDays.ValueMember = "Key";
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Material material = (Material)listBox1.SelectedItem;
+            // Material material = (Material)material.SelectedItem;
         }
 
         private void submit_Click(object sender, EventArgs e)
         {
-            //Validations
-            if (listBox1.SelectedItem == null)
+            String errorList = "";
+            int varWidth = 1;
+            int varLength = 1;
+            int varDrawerCount = 0;
+            Material varMaterial = Material.Oak;
+            int varOrderDays = 14;
+
+            //**** VALIDATION SECTION ****
+
+            //width
+            if (width.Text.Trim() == "")
             {
-               
-                MessageBox.Show("Please select a desktop material");
-               
-                
+                errorList += "Width is required.\n";
+            }
+            else
+            {
+                try
+                {
+                    varWidth = int.Parse(width.Text);
+                }
+                catch
+                {
+                    errorList += "Please enter a valid width (in inches).\n";
+                }
+            }
+
+            //length
+            if (length.Text.Trim() == "")
+            {
+                errorList += "Length is required.\n";
+            }
+            else
+            {
+                try
+                {
+                    varLength = int.Parse(length.Text);
+                }
+                catch
+                {
+                    errorList += "Please enter a valid length (in inches).\n";
+                }
+            }
+
+            //material
+            if (!Enum.IsDefined(typeof(Material), material.SelectedItem))
+            {
+                errorList += "Please select a valid material.\n";
+            }
+            else
+            {
+                varMaterial = (Material)material.SelectedItem;
+            }
+
+            //drawers
+            if (drawerCount.Value < 0 || drawerCount.Value > 7)
+            {
+                errorList += "Please select number of drawers between 0 - 7.\n";
+            }
+            else
+            {
+                varDrawerCount = (int)drawerCount.Value;
+            }
+
+            //orderDays
+            try
+            {
+                varOrderDays = ((KeyValuePair<int, string>)orderDays.SelectedItem).Key;
+                if (varOrderDays != 3 && varOrderDays != 5 && varOrderDays != 7 && varOrderDays != 14)
+                {
+                    errorList += "Please select valid order days (3, 5, 7, or 14).\n";
+                }
+            }
+            catch
+            {
+                errorList += "Please select valid order days (3, 5, 7, or 14).\n";
+            }
+
+            //if any errors then display them and return
+            if (errorList.Length > 0)
+            {
+                MessageBox.Show(errorList);
                 return;
             }
 
-            MessageBox.Show(this.width.Text);
-            MessageBox.Show(this.length.Text);
-            MessageBox.Show(this.days.Text);
-            MessageBox.Show(this.drawers.Text);
-            DeskOrder myDeskOrder = new MegaEscarito.DeskOrder();
-            MessageBox.Show(listBox1.SelectedItem.ToString());
-            //myDeskOrder.SetMaterial(listBox1.SelectedItem);
+            DeskOrder myDeskOrder = new MegaEscarito.DeskOrder(varWidth, varLength, varDrawerCount, varMaterial, varOrderDays);
+
         }
 
     }
@@ -59,7 +139,7 @@ namespace MegaEscarito
     {
         private Material material;
 
-        public DeskOrder()
+        public DeskOrder(int inWidth, int inLength, int inDrawerCount, Material inMaterial, int inOrderDays)
         {
 
         }
@@ -69,5 +149,6 @@ namespace MegaEscarito
             this.material = deskMaterial;
             MessageBox.Show(deskMaterial.ToString());
         }
+
     }
 }
