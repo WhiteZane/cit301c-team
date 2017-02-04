@@ -28,130 +28,130 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.drawers = new System.Windows.Forms.NumericUpDown();
+            this.hdrDeskOrder = new System.Windows.Forms.Label();
+            this.lblWidth = new System.Windows.Forms.Label();
+            this.lblLength = new System.Windows.Forms.Label();
+            this.lblDrawerCount = new System.Windows.Forms.Label();
+            this.lblDeskMaterial = new System.Windows.Forms.Label();
+            this.material = new System.Windows.Forms.ListBox();
+            this.drawerCount = new System.Windows.Forms.NumericUpDown();
             this.width = new System.Windows.Forms.TextBox();
             this.length = new System.Windows.Forms.TextBox();
-            this.rush = new System.Windows.Forms.Label();
-            this.days = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblOrderDays = new System.Windows.Forms.Label();
             this.submit = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.drawers)).BeginInit();
+            this.orderDays = new System.Windows.Forms.ComboBox();
+            ((System.ComponentModel.ISupportInitialize)(this.drawerCount)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // hdrDeskOrder
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(204, 24);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Desk Order Application";
+            this.hdrDeskOrder.AutoSize = true;
+            this.hdrDeskOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.hdrDeskOrder.Location = new System.Drawing.Point(16, 11);
+            this.hdrDeskOrder.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.hdrDeskOrder.Name = "hdrDeskOrder";
+            this.hdrDeskOrder.Size = new System.Drawing.Size(262, 29);
+            this.hdrDeskOrder.TabIndex = 0;
+            this.hdrDeskOrder.Text = "Desk Order Application";
             // 
-            // label2
+            // lblWidth
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 65);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Width in inches";
+            this.lblWidth.AutoSize = true;
+            this.lblWidth.Location = new System.Drawing.Point(16, 52);
+            this.lblWidth.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblWidth.Name = "lblWidth";
+            this.lblWidth.Size = new System.Drawing.Size(104, 17);
+            this.lblWidth.TabIndex = 1;
+            this.lblWidth.Text = "Width in inches";
             // 
-            // label3
+            // lblLength
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(131, 65);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Length in inches";
+            this.lblLength.AutoSize = true;
+            this.lblLength.Location = new System.Drawing.Point(188, 52);
+            this.lblLength.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLength.Name = "lblLength";
+            this.lblLength.Size = new System.Drawing.Size(112, 17);
+            this.lblLength.TabIndex = 2;
+            this.lblLength.Text = "Length in inches";
             // 
-            // label4
+            // lblDrawerCount
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 92);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(95, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Amount of drawers";
+            this.lblDrawerCount.AutoSize = true;
+            this.lblDrawerCount.Location = new System.Drawing.Point(16, 112);
+            this.lblDrawerCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDrawerCount.Name = "lblDrawerCount";
+            this.lblDrawerCount.Size = new System.Drawing.Size(87, 17);
+            this.lblDrawerCount.TabIndex = 3;
+            this.lblDrawerCount.Text = "Dawer count";
             // 
-            // label5
+            // lblDeskMaterial
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(131, 92);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(44, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Material";
+            this.lblDeskMaterial.AutoSize = true;
+            this.lblDeskMaterial.Location = new System.Drawing.Point(187, 113);
+            this.lblDeskMaterial.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDeskMaterial.Name = "lblDeskMaterial";
+            this.lblDeskMaterial.Size = new System.Drawing.Size(58, 17);
+            this.lblDeskMaterial.TabIndex = 4;
+            this.lblDeskMaterial.Text = "Material";
             // 
-            // listBox1
+            // material
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(134, 108);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(82, 56);
-            this.listBox1.TabIndex = 5;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.material.FormattingEnabled = true;
+            this.material.ItemHeight = 16;
+            this.material.Location = new System.Drawing.Point(191, 133);
+            this.material.Margin = new System.Windows.Forms.Padding(4);
+            this.material.Name = "material";
+            this.material.Size = new System.Drawing.Size(108, 68);
+            this.material.TabIndex = 4;
+            this.material.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
-            // drawers
+            // drawerCount
             // 
-            this.drawers.Location = new System.Drawing.Point(15, 108);
-            this.drawers.Name = "drawers";
-            this.drawers.Size = new System.Drawing.Size(92, 20);
-            this.drawers.TabIndex = 6;
+            this.drawerCount.Location = new System.Drawing.Point(15, 133);
+            this.drawerCount.Margin = new System.Windows.Forms.Padding(4);
+            this.drawerCount.Maximum = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+            this.drawerCount.Name = "drawerCount";
+            this.drawerCount.Size = new System.Drawing.Size(123, 22);
+            this.drawerCount.TabIndex = 3;
             // 
             // width
             // 
-            this.width.Location = new System.Drawing.Point(12, 42);
+            this.width.Location = new System.Drawing.Point(15, 73);
+            this.width.Margin = new System.Windows.Forms.Padding(4);
             this.width.Name = "width";
-            this.width.Size = new System.Drawing.Size(80, 20);
-            this.width.TabIndex = 7;
+            this.width.Size = new System.Drawing.Size(105, 22);
+            this.width.TabIndex = 1;
             // 
             // length
             // 
-            this.length.Location = new System.Drawing.Point(134, 42);
+            this.length.Location = new System.Drawing.Point(190, 73);
+            this.length.Margin = new System.Windows.Forms.Padding(4);
             this.length.Name = "length";
-            this.length.Size = new System.Drawing.Size(82, 20);
-            this.length.TabIndex = 8;
+            this.length.Size = new System.Drawing.Size(108, 22);
+            this.length.TabIndex = 2;
             // 
-            // rush
+            // lblOrderDays
             // 
-            this.rush.AutoSize = true;
-            this.rush.Location = new System.Drawing.Point(13, 144);
-            this.rush.Name = "rush";
-            this.rush.Size = new System.Drawing.Size(35, 13);
-            this.rush.TabIndex = 9;
-            this.rush.Text = "label6";
-            // 
-            // days
-            // 
-            this.days.Location = new System.Drawing.Point(15, 244);
-            this.days.Name = "days";
-            this.days.Size = new System.Drawing.Size(79, 20);
-            this.days.TabIndex = 10;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(100, 247);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(71, 13);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Days to Rush";
+            this.lblOrderDays.AutoSize = true;
+            this.lblOrderDays.Location = new System.Drawing.Point(18, 207);
+            this.lblOrderDays.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblOrderDays.Name = "lblOrderDays";
+            this.lblOrderDays.Size = new System.Drawing.Size(79, 17);
+            this.lblOrderDays.TabIndex = 11;
+            this.lblOrderDays.Text = "Order days";
             // 
             // submit
             // 
-            this.submit.Location = new System.Drawing.Point(187, 241);
+            this.submit.Location = new System.Drawing.Point(249, 297);
+            this.submit.Margin = new System.Windows.Forms.Padding(4);
             this.submit.Name = "submit";
-            this.submit.Size = new System.Drawing.Size(75, 23);
-            this.submit.TabIndex = 12;
+            this.submit.Size = new System.Drawing.Size(100, 28);
+            this.submit.TabIndex = 6;
             this.submit.Text = "Submit";
             this.submit.UseVisualStyleBackColor = true;
             this.submit.Click += new System.EventHandler(this.submit_Click);
@@ -159,34 +159,43 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(259, 42);
+            this.label7.Location = new System.Drawing.Point(345, 52);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(69, 13);
+            this.label7.Size = new System.Drawing.Size(93, 17);
             this.label7.TabIndex = 13;
             this.label7.Text = "Out put order";
             // 
+            // orderDays
+            // 
+            this.orderDays.FormattingEnabled = true;
+            this.orderDays.Location = new System.Drawing.Point(19, 227);
+            this.orderDays.Name = "orderDays";
+            this.orderDays.Size = new System.Drawing.Size(155, 24);
+            this.orderDays.TabIndex = 5;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(419, 286);
+            this.ClientSize = new System.Drawing.Size(559, 352);
+            this.Controls.Add(this.orderDays);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.submit);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.days);
-            this.Controls.Add(this.rush);
+            this.Controls.Add(this.lblOrderDays);
             this.Controls.Add(this.length);
             this.Controls.Add(this.width);
-            this.Controls.Add(this.drawers);
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.drawerCount);
+            this.Controls.Add(this.material);
+            this.Controls.Add(this.lblDeskMaterial);
+            this.Controls.Add(this.lblDrawerCount);
+            this.Controls.Add(this.lblLength);
+            this.Controls.Add(this.lblWidth);
+            this.Controls.Add(this.hdrDeskOrder);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Mega Escritorio";
-            ((System.ComponentModel.ISupportInitialize)(this.drawers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.drawerCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -194,20 +203,19 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.NumericUpDown drawers;
+        private System.Windows.Forms.Label hdrDeskOrder;
+        private System.Windows.Forms.Label lblWidth;
+        private System.Windows.Forms.Label lblLength;
+        private System.Windows.Forms.Label lblDrawerCount;
+        private System.Windows.Forms.Label lblDeskMaterial;
+        private System.Windows.Forms.ListBox material;
+        private System.Windows.Forms.NumericUpDown drawerCount;
         private System.Windows.Forms.TextBox width;
         private System.Windows.Forms.TextBox length;
-        private System.Windows.Forms.Label rush;
-        private System.Windows.Forms.TextBox days;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblOrderDays;
         private System.Windows.Forms.Button submit;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox orderDays;
     }
 }
 
