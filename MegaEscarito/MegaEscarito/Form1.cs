@@ -36,6 +36,7 @@ namespace MegaEscarito
             orderDays.DataSource = new BindingSource(orderDayOptions, null);
             orderDays.DisplayMember = "Value";
             orderDays.ValueMember = "Key";
+
         }
         
         private void submit_Click(object sender, EventArgs e)
@@ -59,6 +60,10 @@ namespace MegaEscarito
                 try
                 {
                     varWidth = int.Parse(width.Text);
+                    if (varWidth < 1)
+                    {
+                        errorList += "Width must be at least 1 inch.\n";
+                    }
                 }
                 catch
                 {
@@ -76,6 +81,10 @@ namespace MegaEscarito
                 try
                 {
                     varLength = int.Parse(length.Text);
+                    if (varLength < 1)
+                    {
+                        errorList += "Length must be at least 1 inch.\n";
+                    }
                 }
                 catch
                 {
@@ -130,10 +139,29 @@ namespace MegaEscarito
             myDeskOrder.SaveToFile("orders.txt");
 
             //Show Desk Order on screen
-            //myDeskOrder.ShowOrder();
+            lblSummary.Text = myDeskOrder.ToString();
         }
 
+        private void field_Enter(object sender, EventArgs e)
+        {
+            int lengthOfFieldText;
+            switch (sender.GetType().ToString())
+            {
+                case "System.Windows.Forms.TextBox":
+                    lengthOfFieldText = ((TextBox)sender).Text.Length;
+                    ((TextBox)sender).Select(0, lengthOfFieldText);
+                    break;
+                case "System.Windows.Forms.NumericUpDown":
+                    lengthOfFieldText = ((NumericUpDown)sender).Value.ToString().Length;
+                    ((NumericUpDown)sender).Select(0, lengthOfFieldText);
+                    break;
+                default:
+                    return;
+            }
+        }
     }
+
+
     public class DeskOrder
     {
         private int width;
@@ -259,13 +287,12 @@ namespace MegaEscarito
 
             //Calculate Total Price
             totalPrice = baseDeskPrice + surfaceAreaPrice + drawerPrice + materialPrice + rushOrderPrice;
-            MessageBox.Show(totalPrice.ToString());
         }
 
         public bool SaveToFile(string filePath)
         {
             string desktopOrderAsJSON = CreateJSONstring();
-            MessageBox.Show(desktopOrderAsJSON);
+            
             try
             {
                 StreamWriter writer = new StreamWriter(filePath);
@@ -302,6 +329,30 @@ namespace MegaEscarito
             jsonOrder += "]}";
 
             return jsonOrder;
+        }
+
+        public override string ToString()
+        {
+            string orderSummary = "";
+            int padLeftChars = 14;
+
+            orderSummary += "\n-- DESK DESCRIPTION --\n";
+            orderSummary += "Width:        " + width.ToString() + " inches\n";
+            orderSummary += "Length:       " + length.ToString() + " inches\n";
+            orderSummary += "Surface area: " + surfaceArea.ToString() + " inches squared\n";
+            orderSummary += "Drawers:      " + drawers.ToString() + "\n";
+            orderSummary += "Material:     " + material.ToString() + "\n";
+            orderSummary += "Order days:   " + days.ToString() + (days < 14 ? " (rush)" : " (standard)") + "\n";
+            orderSummary += "\n-- COST BREAKDOWN --\n";
+            orderSummary += "Base desk price:     $" + baseDeskPrice.ToString().PadLeft(padLeftChars) + ".00\n";
+            orderSummary += "Surface area price:  $" + baseDeskPrice.ToString().PadLeft(padLeftChars) + ".00\n";
+            orderSummary += "Drawer price:        $" + drawerPrice.ToString().PadLeft(padLeftChars) + ".00\n";
+            orderSummary += "Material price:      $" + materialPrice.ToString().PadLeft(padLeftChars) + ".00\n";
+            orderSummary += "Rush order price:    $" + rushOrderPrice.ToString().PadLeft(padLeftChars) + ".00\n";
+            orderSummary += "                     ------------------\n";
+            orderSummary += "TOTAL PRICE:         $" + totalPrice.ToString().PadLeft(padLeftChars) + ".00";
+
+            return orderSummary;
         }
     }
 }

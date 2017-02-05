@@ -41,6 +41,7 @@
             this.submit = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.orderDays = new System.Windows.Forms.ComboBox();
+            this.lblSummary = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.drawerCount)).BeginInit();
             this.SuspendLayout();
             // 
@@ -117,6 +118,7 @@
             this.drawerCount.Name = "drawerCount";
             this.drawerCount.Size = new System.Drawing.Size(123, 22);
             this.drawerCount.TabIndex = 3;
+            this.drawerCount.Enter += new System.EventHandler(this.field_Enter);
             // 
             // width
             // 
@@ -125,6 +127,7 @@
             this.width.Name = "width";
             this.width.Size = new System.Drawing.Size(105, 22);
             this.width.TabIndex = 1;
+            this.width.Enter += new System.EventHandler(this.field_Enter);
             // 
             // length
             // 
@@ -133,6 +136,7 @@
             this.length.Name = "length";
             this.length.Size = new System.Drawing.Size(108, 22);
             this.length.TabIndex = 2;
+            this.length.Enter += new System.EventHandler(this.field_Enter);
             // 
             // lblOrderDays
             // 
@@ -146,7 +150,7 @@
             // 
             // submit
             // 
-            this.submit.Location = new System.Drawing.Point(249, 297);
+            this.submit.Location = new System.Drawing.Point(125, 290);
             this.submit.Margin = new System.Windows.Forms.Padding(4);
             this.submit.Name = "submit";
             this.submit.Size = new System.Drawing.Size(100, 28);
@@ -158,26 +162,39 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(345, 52);
+            this.label7.Location = new System.Drawing.Point(353, 23);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(93, 17);
+            this.label7.Size = new System.Drawing.Size(112, 17);
             this.label7.TabIndex = 13;
-            this.label7.Text = "Out put order";
+            this.label7.Text = "Order Summary:";
             // 
             // orderDays
             // 
+            this.orderDays.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.orderDays.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.orderDays.FormattingEnabled = true;
             this.orderDays.Location = new System.Drawing.Point(19, 227);
             this.orderDays.Name = "orderDays";
             this.orderDays.Size = new System.Drawing.Size(155, 24);
             this.orderDays.TabIndex = 5;
             // 
+            // lblSummary
+            // 
+            this.lblSummary.AutoSize = true;
+            this.lblSummary.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.lblSummary.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSummary.Location = new System.Drawing.Point(366, 44);
+            this.lblSummary.Name = "lblSummary";
+            this.lblSummary.Size = new System.Drawing.Size(0, 17);
+            this.lblSummary.TabIndex = 14;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(559, 352);
+            this.ClientSize = new System.Drawing.Size(765, 419);
+            this.Controls.Add(this.lblSummary);
             this.Controls.Add(this.orderDays);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.submit);
@@ -215,6 +232,7 @@
         private System.Windows.Forms.Button submit;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox orderDays;
+        private System.Windows.Forms.Label lblSummary;
     }
 }
 
