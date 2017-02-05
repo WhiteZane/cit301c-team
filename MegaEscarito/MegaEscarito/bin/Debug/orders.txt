@@ -1,1 +1,1 @@
-{"deskOrders":[{"width":"100","length":"11","surfaceArea":"1100","drawers":"7","material":"Oak","days":"3","baseDeskPrice":"200","surfaceAreaPrice":"500","drawerPrice":"350","materialPrice":"200","rushOrderPrice":"70","totalPrice":"1320"}]}
+{"deskOrders":[{"width":"3","length":"6","surfaceArea":"18","drawers":"4","material":"Purpleheart","days":"3","baseDeskPrice":"200","surfaceAreaPrice":"0","drawerPrice":"200","materialPrice":"350","rushOrderPrice":"60","totalPrice":"810"}]}

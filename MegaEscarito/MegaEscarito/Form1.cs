@@ -336,7 +336,7 @@ namespace MegaEscarito
             string orderSummary = "";
             int padLeftChars = 14;
 
-            orderSummary += "\n-- DESK DESCRIPTION --\n";
+            orderSummary += "-- DESK DESCRIPTION --\n";
             orderSummary += "Width:        " + width.ToString() + " inches\n";
             orderSummary += "Length:       " + length.ToString() + " inches\n";
             orderSummary += "Surface area: " + surfaceArea.ToString() + " inches squared\n";
