@@ -19,13 +19,12 @@ namespace MegaEscarito
         {
             InitializeComponent();
 
+            //Initialize materials list box
             Array valArray = Enum.GetValues(typeof(Material));
-
             foreach (Material materialValue in valArray)
             {
                 material.Items.Add(materialValue);
             }
-
             material.SelectedIndex = 0;
 
             //Initialize Order Days options
@@ -34,7 +33,6 @@ namespace MegaEscarito
             orderDayOptions.Add(3, "3 days (rush)");
             orderDayOptions.Add(5, "5 days (rush)");
             orderDayOptions.Add(7, "7 days (rush)");
-
             orderDays.DataSource = new BindingSource(orderDayOptions, null);
             orderDays.DisplayMember = "Value";
             orderDays.ValueMember = "Key";
@@ -129,7 +127,7 @@ namespace MegaEscarito
             DeskOrder myDeskOrder = new MegaEscarito.DeskOrder(varWidth, varLength, varDrawerCount, varMaterial, varOrderDays);
 
             //Save Desk Order to file
-            //myDeskOrder.SaveToFile("C:/text.txt");
+            myDeskOrder.SaveToFile("orders.txt");
 
             //Show Desk Order on screen
             //myDeskOrder.ShowOrder();
@@ -264,41 +262,10 @@ namespace MegaEscarito
             MessageBox.Show(totalPrice.ToString());
         }
 
-        private double Total(int totalSize, int drawers, double cost)
-        {
-            double totals = 0;
-            double totalInch;
-            double costInch = 0;
-            double drawerTotal;
-            double intialCost = 200;
-            
-            //used for finding price of area
-            totalInch = totalSize;
-
-            if (totalInch >= 1000)
-            {
-                double subtract = totalInch - 1000;
-                costInch = subtract * 5;
-            }
-            //cost of drawers
-            drawerTotal = (drawers * 50);
-
-            totals = costInch + intialCost + drawerTotal;
-
-         
-            return totals;
-        }
-
-        public void SetMaterial(MegaEscarito.Material deskMaterial)
-        {
-            material = deskMaterial;
-            MessageBox.Show(deskMaterial.ToString());
-        }
-
         public bool SaveToFile(string filePath)
         {
             string desktopOrderAsJSON = CreateJSONstring();
-
+            MessageBox.Show(desktopOrderAsJSON);
             try
             {
                 StreamWriter writer = new StreamWriter(filePath);
@@ -314,7 +281,27 @@ namespace MegaEscarito
 
         private string CreateJSONstring()
         {
-            return "";
+            string jsonOrder = "";
+
+            // Form JSON
+            jsonOrder += "{\"deskOrders\":[";
+            jsonOrder += "{";
+            jsonOrder += "\"width\":\"" + width.ToString() + "\",";
+            jsonOrder += "\"length\":\"" + length.ToString() + "\",";
+            jsonOrder += "\"surfaceArea\":\"" + surfaceArea.ToString() + "\",";
+            jsonOrder += "\"drawers\":\"" + drawers.ToString() + "\",";
+            jsonOrder += "\"material\":\"" + material + "\",";
+            jsonOrder += "\"days\":\"" + days.ToString() + "\",";
+            jsonOrder += "\"baseDeskPrice\":\"" + baseDeskPrice.ToString() + "\",";
+            jsonOrder += "\"surfaceAreaPrice\":\"" + surfaceAreaPrice.ToString() + "\",";
+            jsonOrder += "\"drawerPrice\":\"" + drawerPrice.ToString() + "\",";
+            jsonOrder += "\"materialPrice\":\"" + materialPrice.ToString() + "\",";
+            jsonOrder += "\"rushOrderPrice\":\"" + rushOrderPrice.ToString() + "\",";
+            jsonOrder += "\"totalPrice\":\"" + totalPrice.ToString() + "\"";
+            jsonOrder += "}";
+            jsonOrder += "]}";
+
+            return jsonOrder;
         }
     }
 }
