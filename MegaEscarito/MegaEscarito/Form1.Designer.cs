@@ -104,7 +104,6 @@
             this.material.Name = "material";
             this.material.Size = new System.Drawing.Size(108, 68);
             this.material.TabIndex = 4;
-            this.material.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // drawerCount
             // 

@@ -39,12 +39,7 @@ namespace MegaEscarito
             orderDays.DisplayMember = "Value";
             orderDays.ValueMember = "Key";
         }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           // Material material = (Material)material.SelectedItem;
-        }
-
+        
         private void submit_Click(object sender, EventArgs e)
         {
             String errorList = "";
@@ -130,14 +125,24 @@ namespace MegaEscarito
                 return;
             }
 
+            //Create new DeskOrder instance and run calculations
             DeskOrder myDeskOrder = new MegaEscarito.DeskOrder(varWidth, varLength, varDrawerCount, varMaterial, varOrderDays);
 
+            //Save Desk Order to file
+            myDeskOrder.SaveToFile("C:/text.txt");
+
+            //Show Desk Order on screen
+            //myDeskOrder.ShowOrder();
         }
 
     }
     public class DeskOrder
     {
+        private int width;
+        private int length;
+        private int drawerCount;
         private Material material;
+        private int orderDays;
 
         public DeskOrder(int inWidth, int inLength, int inDrawerCount, Material inMaterial, int inOrderDays)
         {
@@ -253,6 +258,7 @@ namespace MegaEscarito
 
 
         }
+
         private double Total(int totalSize, int drawers, double cost)
         {
             double totals = 0;
@@ -283,6 +289,27 @@ namespace MegaEscarito
             this.material = deskMaterial;
             MessageBox.Show(deskMaterial.ToString());
         }
-        
+
+        public bool SaveToFile(string filePath)
+        {
+            string desktopOrderAsJSON = this.CreateJSONstring();
+
+            try
+            {
+                StreamWriter writer = new StreamWriter(filePath);
+                writer.WriteLine(desktopOrderAsJSON);
+                writer.Close();
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private string CreateJSONstring()
+        {
+            return "";
+        }
     }
 }
