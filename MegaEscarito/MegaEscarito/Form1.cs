@@ -129,7 +129,7 @@ namespace MegaEscarito
             DeskOrder myDeskOrder = new MegaEscarito.DeskOrder(varWidth, varLength, varDrawerCount, varMaterial, varOrderDays);
 
             //Save Desk Order to file
-            myDeskOrder.SaveToFile("C:/text.txt");
+            //myDeskOrder.SaveToFile("C:/text.txt");
 
             //Show Desk Order on screen
             //myDeskOrder.ShowOrder();
@@ -140,123 +140,128 @@ namespace MegaEscarito
     {
         private int width;
         private int length;
-        private int drawerCount;
+        private int surfaceArea;
+        private int drawers;
         private Material material;
-        private int orderDays;
+        private int days;
+
+        //material price list
+        private Dictionary<Material, int> materialPriceList = new Dictionary<Material, int>();
+
+        //rush order price array
+        private string[] rushOrderPrices;
+
+        //base desk price
+        private const int baseDeskPrice = 200;
+
+        //calculated variables
+        private int surfaceAreaPrice;
+        private int drawerPrice;
+        private int materialPrice;
+        private int rushOrderPrice;
+        private int totalPrice;
 
         public DeskOrder(int inWidth, int inLength, int inDrawerCount, Material inMaterial, int inOrderDays)
         {
-            //asigning to new variables
-            int width = inWidth;
-            int length = inLength;
-            int drawers = inDrawerCount;
-            int days = inOrderDays;
-            int totalSize = width * length;
+            //assign values to instance variables
+            width = inWidth;
+            length = inLength;
+            surfaceArea = width * length;
+            drawers = inDrawerCount;
+            material = inMaterial;
+            days = inOrderDays;
             
-            
-            
-            // rush order Array read in, You might want to use yours mine is [9,0]
-            string[] prices = File.ReadAllLines("rushPrices.txt");
-            double[,] rushOrderArray = new double[prices.Length, 3];
-            int[,] price = new int[3, 3];
+            //populate material price list
+            materialPriceList.Add(Material.Oak, 200);
+            materialPriceList.Add(Material.Laminate, 100);
+            materialPriceList.Add(Material.Pine, 50);
+            materialPriceList.Add(Material.Purpleheart, 350);
+            materialPriceList.Add(Material.Zebrawood, 300);
+            materialPriceList.Add(Material.Mahogany, 250);
 
-            for (int i = 0; i < prices.Length; i++)
+            //rush order Array read in
+            rushOrderPrices = File.ReadAllLines("rushPrices.txt");
+
+            //Calculate Prices
+            CalculatePrices();
+            
+        }
+
+        private void CalculatePrices()
+        {
+
+            //Initialize then Calculate Surface Area Price
+            surfaceAreaPrice = 0;
+            if(surfaceArea > 1000)
             {
-                string[] fields = prices[i].Split(' ');
-                for (int j = 0; j < fields.Length; j++)
-                {
-                    if (j == 3) break;
-                    rushOrderArray[i, j] = double.Parse(fields[j]);
-
-
-
-
-
-                }
-            }
-            
-            // figure out cost of rush order
-            double[,] rushTable = new double[3, 3];
-            double[] rushInfo = new double[3];
-            double size = totalSize;
-            double cost = 0;
-            rushTable = rushOrderArray;
-
-            if (days == 3)
-            {
-                if (size < 1000)
-                {
-                    cost = rushTable[0, 0];
-
-                }
-                else if (size >= 1000 && size <= 1999)
-                {
-                    cost = rushTable[1, 0];
-
-                }
-                else if (size >= 2000)
-                {
-                    cost = rushTable[2, 0];
-
-                }
+                surfaceAreaPrice = (surfaceArea - 1000) * 5;
             }
 
-            if (days == 5)
+
+            //Calculate Drawer Price
+            drawerPrice = drawers * 50;
+
+
+            //Initialize then Calculate Material Price
+            materialPrice = 0;
+            if (materialPriceList.ContainsKey(material))
             {
-                if (size < 1000)
-                {
-                    cost = rushTable[3, 0];
-
-                }
-                else if (size >= 1000 && size <= 1999)
-                {
-                    cost = rushTable[4, 0];
-
-                }
-                else if (size >= 2000)
-                {
-                    cost = rushTable[5, 0];
-
-                }
-            }
-            if (days == 7)
-            {
-                if (size < 1000)
-                {
-                    cost = rushTable[6, 0];
-
-                }
-                else if (size >= 1000 && size <= 1999)
-                {
-                    cost = rushTable[7, 0];
-
-                }
-                else if (size >= 2000)
-                {
-                    cost = rushTable[8, 0];
-
-                }
+                materialPrice = materialPriceList[material];
             }
 
-            if (days == 14)
+
+            //Calculate Rush Order Price
+            switch (days)
             {
-                cost = 0;
+                case 3:
+                    if (surfaceArea < 1000) {
+                        rushOrderPrice = int.Parse(rushOrderPrices[0]);
+                    }
+                    else if (surfaceArea < 2000)
+                    {
+                        rushOrderPrice = int.Parse(rushOrderPrices[1]);
+                    }
+                    else
+                    {
+                        rushOrderPrice = int.Parse(rushOrderPrices[2]);
+                    }
+                    break;
+                case 5:
+                    if (surfaceArea < 1000)
+                    {
+                        rushOrderPrice = int.Parse(rushOrderPrices[3]);
+                    }
+                    else if (surfaceArea < 2000)
+                    {
+                        rushOrderPrice = int.Parse(rushOrderPrices[4]);
+                    }
+                    else
+                    {
+                        rushOrderPrice = int.Parse(rushOrderPrices[5]);
+                    }
+                    break;
+                case 7:
+                    if (surfaceArea < 1000)
+                    {
+                        rushOrderPrice = int.Parse(rushOrderPrices[6]);
+                    }
+                    else if (surfaceArea < 2000)
+                    {
+                        rushOrderPrice = int.Parse(rushOrderPrices[7]);
+                    }
+                    else
+                    {
+                        rushOrderPrice = int.Parse(rushOrderPrices[8]);
+                    }
+                    break;
+                default:
+                    rushOrderPrice = 0;
+                    break;
             }
 
-            rushInfo[1] = days;
-            rushInfo[2] = cost;
-            
-            // figure out cost send it to total
-            double totalPrice = Total(totalSize, drawers, cost);
-
-            string x2 = System.Convert.ToString(totalPrice);
-            MessageBox.Show(x2);
-
-
-
-
-
-
+            //Calculate Total Price
+            totalPrice = baseDeskPrice + surfaceAreaPrice + drawerPrice + materialPrice + rushOrderPrice;
+            MessageBox.Show(totalPrice.ToString());
         }
 
         private double Total(int totalSize, int drawers, double cost)
@@ -286,13 +291,13 @@ namespace MegaEscarito
 
         public void SetMaterial(MegaEscarito.Material deskMaterial)
         {
-            this.material = deskMaterial;
+            material = deskMaterial;
             MessageBox.Show(deskMaterial.ToString());
         }
 
         public bool SaveToFile(string filePath)
         {
-            string desktopOrderAsJSON = this.CreateJSONstring();
+            string desktopOrderAsJSON = CreateJSONstring();
 
             try
             {
