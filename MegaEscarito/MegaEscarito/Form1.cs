@@ -345,7 +345,7 @@ namespace MegaEscarito
             orderSummary += "Order days:   " + days.ToString() + (days < 14 ? " (rush)" : " (standard)") + "\n";
             orderSummary += "\n-- COST BREAKDOWN --\n";
             orderSummary += "Base desk price:     $" + baseDeskPrice.ToString().PadLeft(padLeftChars) + ".00\n";
-            orderSummary += "Surface area price:  $" + baseDeskPrice.ToString().PadLeft(padLeftChars) + ".00\n";
+            orderSummary += "Surface area price:  $" + surfaceAreaPrice.ToString().PadLeft(padLeftChars) + ".00\n";
             orderSummary += "Drawer price:        $" + drawerPrice.ToString().PadLeft(padLeftChars) + ".00\n";
             orderSummary += "Material price:      $" + materialPrice.ToString().PadLeft(padLeftChars) + ".00\n";
             orderSummary += "Rush order price:    $" + rushOrderPrice.ToString().PadLeft(padLeftChars) + ".00\n";
